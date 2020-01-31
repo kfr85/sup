@@ -1,0 +1,18 @@
+env:
+  PATH: "/var/log/httpd/access.log"
+  API: "/api/v2/login"
+  TIME: "29/Jan/2020:23"
+networks:
+  local:
+    hosts:
+      - localhost
+commands:
+  uname:
+    run: /usr/bin/uname -a
+  collect_access_count:
+    run: /bin/cat $PATH | /usr/bin/grep $API | /usr/bin/grep $TIME | /usr/bin/awk '{print $4}' | /usr/bin/cut -b 2-21 | /usr/bin/sort | /usr/bin/uniq -c
+targets:
+  all:
+    - uname
+    - collect_access_count
+

@@ -9,11 +9,11 @@ networks:
 commands:
   uname:
     run: /usr/bin/uname -a
-  collect_access_count:
-    desc: "collect count that requests per sec"
+  collect:
+    desc: collect count that requests per sec
     run: /bin/cat $PATH | /usr/bin/grep $API | /usr/bin/grep $TIME | /usr/bin/awk '{print $4}' | /usr/bin/cut -b 2-21 | /usr/bin/sort | /usr/bin/uniq -c
 targets:
   all:
     - uname
-    - collect_access_count
+    - collect
 
